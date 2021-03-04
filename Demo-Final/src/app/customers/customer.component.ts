@@ -68,6 +68,17 @@ export class CustomerComponent implements OnInit {
       value => this.setNotification(value)
     );
 
+    this.customerForm.get('sendCatalog').valueChanges.subscribe(
+      value => {
+        if (!value) {
+          this.addresses.clear()
+        }
+        else {
+          this.addAddress();
+        }
+      }
+    );
+    
     const emailControl = this.customerForm.get('emailGroup.email');
     emailControl.valueChanges.pipe(
       debounceTime(1000)
